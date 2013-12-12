@@ -21,4 +21,9 @@ describe 'artifactory' do
   it 'should install the unzip package' do
     expect(chef_run).to install_package('unzip')
   end
+
+  it 'should install the java7 package' do
+    expect(chef_run).to install_package('openjdk-7-jre')
+    expect(chef_run).to install_package('openjdk-7-jdk')
+  end
 end
