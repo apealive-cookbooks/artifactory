@@ -13,4 +13,8 @@ describe 'artifactory' do
   it 'should include the java recipe' do
     expect(chef_run).to include_recipe 'java'
   end
+
+  it 'should include the runit recipe' do
+    expect(chef_run).to include_recipe 'runit'
+  end
 end
