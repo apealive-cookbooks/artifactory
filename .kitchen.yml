@@ -1,0 +1,19 @@
+---
+driver_plugin: vagrant
+
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    box: ubuntu-base-1204
+    box_url: http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box
+    require_chef_omnibus: "11.6.0"
+  attributes:
+    example:
+      version: "1.0.0"
+      config:
+        a: 1
+        b: [2, 3]
+
+suites:
+- name: example
+  run_list: ["recipe[skeleton::default]"]
