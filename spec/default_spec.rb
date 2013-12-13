@@ -28,6 +28,6 @@ describe 'artifactory' do
   end
 
   it 'should install artifactory into /opt/artifactory' do
-    expect(chef_run).to render_file("/opt/artifactory")
+    expect(chef_run).to render_file("/opt/artifactory/data/artifactory.properties")
   end
 end
