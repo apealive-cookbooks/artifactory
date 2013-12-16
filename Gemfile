@@ -13,7 +13,7 @@ group :test do
 end
 
 group :integration do
-  gem 'test-kitchen', '~> 1.0.0.beta'
+  gem 'test-kitchen', '~> 1.0.0'
   gem 'kitchen-vagrant'
   gem 'serverspec'
 end
