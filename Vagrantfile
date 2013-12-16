@@ -24,8 +24,8 @@ NETWORKING = {
 Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
 
-  config.vm.box = "ubuntu-base-1204"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box = "ubuntu-base"
+  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
 
   ## This vagrant is meant to be used from the root directory of the cookbook
