@@ -27,7 +27,4 @@ describe 'artifactory' do
     expect(chef_run).to install_package('openjdk-7-jdk')
   end
 
-  it 'should install artifactory into /opt/artifactory' do
-    expect(chef_run).to render_file("/opt/artifactory/data/artifactory.properties")
-  end
 end
