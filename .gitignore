@@ -8,3 +8,5 @@ Gemfile.lock
 .*.sw[a-z]
 *.un~
 /cookbooks
+/.kitchen/default-ubuntu-1204.yml
+/.kitchen/kitchen-vagrant/default-ubuntu-1204/Vagrantfile
