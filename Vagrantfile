@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-DEFAULT_RUN_LIST = ["recipe[vagrant-essentials]"]
+DEFAULT_RUN_LIST = ["recipe[artifactory::default]"]
 NODE_JSON = {}
 
 # Inject networking configuration if you need something special.

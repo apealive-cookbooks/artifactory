@@ -9,6 +9,8 @@ end
 
 ark "artifactory" do
   url node[:artifactory_url]
-  path node[:artifactory_deploy_path]
-  action :install
+  path '/opt'
+  action :put
 end
+
+
