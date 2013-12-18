@@ -13,4 +13,21 @@ ark "artifactory" do
   action :put
 end
 
+directory "/opt/artifactory/logs"
+
+bash "artifactory_check" do
+  command "/opt/artifactory/bin/artifactoryctl check"
+end
+
+bash "artifactory_upstart_installation" do
+  command "/opt/artifactory/bin/installService.sh"
+end
+
+bash "artifactory_upstart_check" do
+  command "service artifactory check"
+end
+
+bash "artifactory_upstart_start" do
+  command "service artifactory start"
+end  
 
