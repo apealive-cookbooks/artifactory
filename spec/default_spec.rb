@@ -10,6 +10,10 @@ describe 'artifactory' do
     stub_command("update-alternatives --display java | grep '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java - priority 1100'").and_return(true)
   end
 
+  it 'should include the ulimit recipe' do
+    expect(chef_run).to include_recipe 'ulimit'
+  end
+
   it 'should include the apt recipe' do
     expect(chef_run).to include_recipe 'apt'
   end
