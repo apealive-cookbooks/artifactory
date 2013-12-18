@@ -15,7 +15,8 @@ end
 directory "/opt/artifactory/logs"
 
 bash "artifactory_check" do
-  command "/opt/artifactory/bin/artifactoryctl check"
+  code "/opt/artifactory/bin/artifactoryctl check"
+  returns [1]
 end
 
 bash "artifactory_upstart_installation" do
