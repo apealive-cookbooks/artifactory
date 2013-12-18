@@ -19,7 +19,7 @@ describe 'artifactory' do
   end
 
   it 'should include the runit recipe' do
-    expect(chef_run).to include_recipe 'runit'
+    expect(chef_run).to.not include_recipe 'runit'
   end
 
   it 'should install the unzip package' do
