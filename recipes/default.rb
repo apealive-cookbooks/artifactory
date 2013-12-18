@@ -24,7 +24,8 @@ bash "artifactory_upstart_installation" do
 end
 
 bash "artifactory_upstart_check" do
-  command "service artifactory check"
+  code "service artifactory check"
+  returns [1]  
 end
 
 bash "artifactory_upstart_start" do
