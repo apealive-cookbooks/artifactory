@@ -6,6 +6,10 @@ describe 'artifactory' do
     end.converge("#{described_cookbook}")
   end
 
+  before do
+    stub_command("update-alternatives --display java | grep '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java - priority 1100'").and_return(true)
+  end
+
   it 'should include the apt recipe' do
     expect(chef_run).to include_recipe 'apt'
   end
@@ -23,7 +27,7 @@ describe 'artifactory' do
   end
 
   it 'should install the java7 package' do
-    expect(chef_run).to install_package('openjdk-7-jre')
+    expect(chef_run).to install_package('openjdk-7-jre-headless')
     expect(chef_run).to install_package('openjdk-7-jdk')
   end
 
