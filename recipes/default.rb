@@ -1,3 +1,4 @@
+include_recipe "ulimit::default"
 include_recipe "apt::default"
 include_recipe "java::default"
 
@@ -5,6 +6,8 @@ include_recipe "java::default"
 package 'unzip' do
   action :install
 end
+
+
 
 ark "artifactory" do
   url node[:artifactory_url]
@@ -20,7 +23,7 @@ bash "artifactory_check" do
 end
 
 bash "artifactory_upstart_installation" do
-  command "/opt/artifactory/bin/installService.sh"
+  code "/opt/artifactory/bin/installService.sh"
 end
 
 bash "artifactory_upstart_check" do
@@ -29,6 +32,6 @@ bash "artifactory_upstart_check" do
 end
 
 bash "artifactory_upstart_start" do
-  command "service artifactory start"
+  code "service artifactory start"
 end  
 
