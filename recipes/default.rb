@@ -6,9 +6,7 @@ package 'unzip' do
   action :install
 end
 
-
-
-ark "artifactory" do
+ark "artifactory" do 
   url node[:artifactory_url]
   path '/opt'
   action :put
@@ -17,20 +15,20 @@ end
 directory "/opt/artifactory/logs"
 
 bash "artifactory_check" do
-  code "/opt/artifactory/bin/artifactoryctl check"
-  returns [1]
+  command '/opt/artifactory/bin/artifactoryctl check'
+  returns [0,1]
 end
 
 bash "artifactory_upstart_installation" do
-  code "/opt/artifactory/bin/installService.sh"
+  command '/opt/artifactory/bin/installService.sh'
 end
 
 bash "artifactory_upstart_check" do
-  code "service artifactory check"
-  returns [1]  
+  command  'service artifactory check'
+  returns [0,1]  
 end
 
 bash "artifactory_upstart_start" do
-  code "service artifactory start"
+  command 'service artifactory start'
 end  
 
