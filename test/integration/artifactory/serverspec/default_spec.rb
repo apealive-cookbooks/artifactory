@@ -16,7 +16,7 @@ describe 'artifactory' do
   end
 
   it 'should start the artifactory web service on port 8081' do
-    expect(Net::HTTP.get('localhost:8081', 'artifactory')).to include("estuteh")
+    expect(Net::HTTP.get('localhost:8081', '')).to include("artifactory")
   end
 end
 

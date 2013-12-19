@@ -5,13 +5,6 @@ package 'unzip' do
   action :install
 end
 
-template '/etc/security/limits.conf' do
-  source 'etc-security-limits-conf.erb'
-  mode 0600
-  owner 'root'
-  group 'root'
-end
-
 ark "artifactory" do 
   url node[:artifactory_url]
   path '/opt'
@@ -21,20 +14,17 @@ end
 directory "/opt/artifactory/logs"
 
 bash "artifactory_check" do
-  command '/opt/artifactory/bin/artifactoryctl check'
+  code '/opt/artifactory/bin/artifactoryctl check'
   returns [0,1]
 end
 
 bash "artifactory_upstart_installation" do
-  command '/opt/artifactory/bin/installService.sh'
+  code '/opt/artifactory/bin/installService.sh'
 end
 
-bash "artifactory_upstart_check" do
-  command  'service artifactory check'
-  returns [0,1]  
-end
+# service "artifactory" do
+#   action :start
+# end
 
-bash "artifactory_upstart_start" do
-  command 'service artifactory start'
-end  
+execute "service artifactory start"
 

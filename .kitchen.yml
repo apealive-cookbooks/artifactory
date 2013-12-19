@@ -4,6 +4,8 @@ driver_config:
   require_chef_omnibus: "11.6.0"
   box: ubuntu-base
   box_url: http://files.vagrantup.com/precise32.box
+  customize:
+    memory: 1024
   
 platforms:
 - name: ubuntu-12.04
