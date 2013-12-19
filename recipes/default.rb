@@ -1,9 +1,15 @@
 include_recipe "apt::default"
 include_recipe "java::default"
 
-
 package 'unzip' do
   action :install
+end
+
+template '/etc/security/limits.conf' do
+  source 'etc-security-limits-conf.erb'
+  mode 0600
+  owner 'root'
+  group 'root'
 end
 
 ark "artifactory" do 
