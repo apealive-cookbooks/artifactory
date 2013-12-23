@@ -1,30 +1,24 @@
-include_recipe "apt::default"
-include_recipe "java::default"
-
-package 'unzip' do
-  action :install
+include_recipe 'runit::default'
+include_recipe 'apt::default'
+include_recipe 'java::default'
+ 
+user 'artifactory' do
+  home '/opt/artifactory'
 end
-
-ark "artifactory" do 
+ 
+package 'unzip'
+ 
+ark 'artifactory' do
   url node[:artifactory_url]
   path '/opt'
   action :put
+  owner 'artifactory'
+  group 'artifactory'
 end
-
-directory "/opt/artifactory/logs"
-
-bash "artifactory_check" do
-  code '/opt/artifactory/bin/artifactoryctl check'
-  returns [0,1]
+ 
+directory '/opt/artifactory/logs' do
+  owner 'artifactory'
+  group 'artifactory'
 end
-
-bash "artifactory_upstart_installation" do
-  code '/opt/artifactory/bin/installService.sh'
-end
-
-# service "artifactory" do
-#   action :start
-# end
-
-execute "service artifactory start"
-
+ 
+runit_service 'artifactory'
