@@ -20,5 +20,12 @@ directory '/opt/artifactory/logs' do
   owner 'artifactory'
   group 'artifactory'
 end
- 
-runit_service 'artifactory'
+
+directory '/opt/artifactory/tomcat/logs' do
+  owner 'artifactory'
+  group 'artifactory'
+end
+
+runit_service 'artifactory' do
+  log false
+end
