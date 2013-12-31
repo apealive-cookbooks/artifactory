@@ -59,6 +59,10 @@ Vagrant.configure("2") do |config|
   else
     puts "WARNING: this Vagrantfile is meant to be run in the root directory of the cookbook\n\n"
   end
+
+  config.vm.provider :virtualbox do |p|
+    p.customize ["modifyvm", :id, "--memory", "1024"]
+  end
 end
 
 ## helper methods
