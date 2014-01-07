@@ -1,31 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-DEFAULT_RUN_LIST = ["recipe[artifactory::default]"]
+DEFAULT_RUN_LIST = []
 NODE_JSON = {}
 
 # Inject networking configuration if you need something special.
 # The key names match the recipe names in this cookbook.
 NETWORKING = {
-#  "dash" => {
-#    :forward => {
-#      "4567" => "4567"
-#    }
-#  },
-#  "server" => {
-#    :ip => "33.33.33.20",
-#    :forward => {
-#      "5555" => "5555"
-#    }
-#  }
+ "default" => {
+   :ip => "33.33.33.20"
+  }
 }
 
 
 Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
+  config.omnibus.chef_version = "11.4.0"
 
-  config.vm.box = "ubuntu-base"
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
 
   ## This vagrant is meant to be used from the root directory of the cookbook
@@ -38,18 +31,19 @@ Vagrant.configure("2") do |config|
     RECIPES = Dir.entries("recipes").select {|f| !File.directory? f}.map { |f| f.gsub(/\.rb/,"") }
 
     RECIPES.each do |recipe|
-      hostname = "vagrant.#{COOKBOOK}.#{recipe}"
+      hostname = "#{recipe}.#{COOKBOOK}.vagrant"
 
-      config.vm.define recipe.to_sym do |vm_config|
+      config.vm.define hostname do |vm_config|
 
         vm_config.vm.provision :chef_solo do |chef|
           chef.run_list = DEFAULT_RUN_LIST.clone << "recipe[#{COOKBOOK}::#{recipe}]"
           chef.json = NODE_JSON
           chef.node_name = hostname
+          chef.log_level = :debug
         end
 
         vm_config.vm.hostname = hostname
-        vm_config.vm.network :private_network, ip: ip_override(recipe) if has_ip_override?(recipe)
+        vm_config.vm.network :private_network, ip: "192.168.99.14"
 
         port_forwards(recipe).each do |port1, port2|
           vm_config.vm.network :forwarded_port, guest: port1.to_i, host: port2.to_i
@@ -61,7 +55,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provider :virtualbox do |p|
-    p.customize ["modifyvm", :id, "--memory", "1024"]
+    p.customize ["modifyvm", :id, "--memory", "2048"]
   end
 end
 
