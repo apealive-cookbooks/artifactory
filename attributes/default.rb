@@ -4,5 +4,8 @@ default['java']['install_flavor'] = 'openjdk'
 default['java']['openjdk_packages'] = ['openjdk-7-jre-headless', 'openjdk-7-jdk']
 default['java']['jdk_version'] = '7'
 
-default['artifactory_url'] = 'http://dl.bintray.com/content/jfrog/artifactory/artifactory-3.0.4.zip?direct'
-default['artifactory_deploy_path'] = '/opt'
+default['artifactory']['version'] = '3.0.4'
+default['artifactory']['user'] = 'artifactory'
+default['artifactory']['dir'] = '/opt/artifactory'
+
+node.set['artifactory']['url'] = "http://dl.bintray.com/content/jfrog/artifactory/artifactory-#{node['artifactory']['version']}.zip?direct"

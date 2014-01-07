@@ -2,30 +2,20 @@ include_recipe 'runit::default'
 include_recipe 'apt::default'
 include_recipe 'java::default'
  
-user 'artifactory' do
-  home '/opt/artifactory'
+user node['artifactory']['user'] do
+  home node['artifactory']['dir']
 end
  
 package 'unzip'
  
 ark 'artifactory' do
-  url node[:artifactory_url]
-  path '/opt'
   action :put
-  owner 'artifactory'
-  group 'artifactory'
-end
- 
-directory '/opt/artifactory/logs' do
-  owner 'artifactory'
-  group 'artifactory'
-end
-
-directory '/opt/artifactory/tomcat/logs' do
-  owner 'artifactory'
-  group 'artifactory'
+  url node['artifactory']['url']
+  path File.dirname(node['artifactory']['dir'])
+  owner node['artifactory']['user']
+  group node['artifactory']['user']
 end
 
 runit_service 'artifactory' do
-  log false
+  default_logger true
 end
