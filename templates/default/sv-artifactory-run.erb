@@ -1,6 +1,6 @@
 #! /bin/sh
 exec 2>&1
 
-exec chpst -u <%= node['artifactory']['user'] %> <%= node['artifactory']['dir'] %>/bin/artifactory.sh
+exec chpst -e env -u <%= node['artifactory']['user'] %> <%= node['artifactory']['dir'] %>/tomcat/bin/catalina.sh run
 
     
