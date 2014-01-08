@@ -20,7 +20,7 @@ runit_service 'artifactory' do
   default_logger true
   env({
         "CATALINA_OPTS" => [
-                            node['artifactory']['java_options'],
+                            node['artifactory']['java_opts'],
                             "-Dfile.encoding=UTF8",
                             "-Dartifactory.home=#{node['artifactory']['dir']}"
                            ].join(" "),

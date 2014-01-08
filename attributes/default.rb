@@ -7,6 +7,6 @@ default['java']['jdk_version'] = '7'
 default['artifactory']['version'] = '3.1.0'
 default['artifactory']['user'] = 'artifactory'
 default['artifactory']['dir'] = '/opt/artifactory'
-default['artifactory']['java_options'] = '-server -Xms512m -Xmx2g -Xss256k -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseG1GC'
+default['artifactory']['java_opts'] = '-server -Xms512m -Xmx2g -Xss256k -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseG1GC'
 
 node.set['artifactory']['url'] = "http://dl.bintray.com/content/jfrog/artifactory/artifactory-#{node['artifactory']['version']}.zip?direct"
